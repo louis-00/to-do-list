@@ -10,7 +10,10 @@ export class TasksService {
 
   constructor() { 
 
-    console.log('servicio inicializado');
+    const lista1 = new Task('Tocar piano')
+    const lista2 = new Task('Leer 5 libros')
+    
+    this.tasks.push(lista1, lista2)
     
   }
 
