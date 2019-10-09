@@ -16,7 +16,7 @@ const routes: Routes = [
               import('../tab1/tab1.module').then(m => m.Tab1PageModule)
           },
           {
-            path: 'add',
+            path: 'add/:taskId',
             loadChildren: '../add/add.module#AddPageModule' 
           }
         ]

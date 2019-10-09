@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TasksService } from 'src/app/services/tasks.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Task } from 'src/app/models/task.model';
 
 @Component({
   selector: 'app-tab1',
@@ -18,9 +19,7 @@ export class Tab1Page {
   }
  
   async addTask(){
-   
-    // this.router.navigateByUrl('/tabs/tab1/add') 
-    
+       
     const alert = await this.alertCtrl.create({
         header: 'New task',
         inputs:[
@@ -38,7 +37,9 @@ export class Tab1Page {
                if (data.title.length === 0) {
                  return;
                }
-               this.taskService.createTask(data.title)
+               const taskId = this.taskService.createTask(data.title);
+
+               this.router.navigateByUrl(`/tabs/tab1/add/${taskId}`);
             }
            },
           {

@@ -10,16 +10,33 @@ export class TasksService {
 
   constructor() { 
 
-    const lista1 = new Task('Tocar piano')
-    const lista2 = new Task('Leer 5 libros')
+    this.loadStorage();
     
-    this.tasks.push(lista1, lista2)
-    
-  }
+  };
 
   createTask(title:string){
 
-    const newTask = new Task(title)
-    this.tasks.push(newTask)
-  }
+    const newTask = new Task(title);
+    this.tasks.push(newTask);
+    this.saveStorage();
+    return newTask.id;
+  };
+
+  getTask(id:string|number){
+    id = Number(id);
+    return this.tasks.find( taskData => taskData.id === id);
+  };
+
+  saveStorage(){
+    localStorage.setItem('data', JSON.stringify(this.tasks));
+  };
+
+  loadStorage(){
+
+    if (localStorage.getItem('data')) {
+      this.tasks = JSON.parse(localStorage.getItem('data'));
+    }else{
+      this.tasks = [];
+    }
+  };
 }
