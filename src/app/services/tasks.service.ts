@@ -17,4 +17,9 @@ export class TasksService {
     
   }
 
+  createTask(title:string){
+
+    const newTask = new Task(title)
+    this.tasks.push(newTask)
+  }
 }
