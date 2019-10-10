@@ -39,4 +39,25 @@ export class AddPage implements OnInit {
     this.taskService.saveStorage();
 
   };
+
+  check(item:taskItem){
+
+    
+    const thingsToDo = this.task.items.filter(itemData => !itemData.done).length;
+
+    if (thingsToDo === 0) {
+      this.task.finishedOn = new Date();
+      this.task.done = true;
+    }else{
+      this.task.finishedOn = null;
+      this.task.done = false;
+    }; 
+
+    this.taskService.saveStorage(); 
+
+    console.log(this.taskService.tasks);
+    
+    
+  }
 }
+ 
