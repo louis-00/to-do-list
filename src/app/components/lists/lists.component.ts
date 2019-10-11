@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { TasksService } from "../../services/tasks.service";
 import { Router } from "@angular/router";
 import { Task } from 'src/app/models/task.model';
+import { AlertController, IonList } from '@ionic/angular';
 
 @Component({
   selector: 'app-lists',
@@ -10,10 +11,13 @@ import { Task } from 'src/app/models/task.model';
 })
 export class ListsComponent implements OnInit {
 
+  @ViewChild( IonList, {static: false}) task: IonList;
+
   @Input() completed = true;
 
   constructor(public taskService:TasksService,
-              private router:Router
+              private router:Router,
+              private alertCtrl:AlertController
   ) { }
 
   ngOnInit() {}
@@ -36,5 +40,48 @@ export class ListsComponent implements OnInit {
     this.taskService.deleteTask(task);
 
   };
+
+  async editTask(task:Task){
+       
+      const alert = await this.alertCtrl.create({
+          header: 'Edit task',
+          inputs:[
+            {
+              name:'title',
+              type:'text',
+              value:`${task.title}`,
+              placeholder:'Task title'
+            }
+          ],
+          buttons: [
+            {
+              text:'Edit',
+              handler:(data)=>{
+                 console.log(data);
+                 if (data.title.length === 0) {
+                   return;
+                 }  
+
+                 task.title = data.title;
+                 
+                this.taskService.saveStorage();
+                this.task.closeSlidingItems();
+              }
+             },
+            {
+              text:'Cancel',
+              role:'cancel',
+              handler: ()=>{
+                console.log('cancelar');
+                this.task.closeSlidingItems();
+
+              }
+            }
+          ]
+        });
+    
+        alert.present();
+    };
+  
 
 }
