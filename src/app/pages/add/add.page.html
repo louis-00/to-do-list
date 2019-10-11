@@ -16,7 +16,7 @@
     </ion-list>
 
     <ion-list>
-        <ion-list-header color="dark">
+        <ion-list-header color="dark" *ngIf="task.items.length > 0">
             <ion-label>Tasks to do</ion-label>
         </ion-list-header>
 

@@ -54,5 +54,12 @@ export class Tab1Page {
   
       alert.present();
   }
+
+  selectedTask(task:Task){
+
+    console.log(task);
+    this.router.navigateByUrl(`/tabs/tab1/add/${task.id}`)
+    
+  }
   
 }
