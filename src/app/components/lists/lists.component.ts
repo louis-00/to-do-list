@@ -29,6 +29,12 @@ export class ListsComponent implements OnInit {
 
     console.log(task);
     
-  }
+  };
+
+  deleteTask(task:Task){
+
+    this.taskService.deleteTask(task);
+
+  };
 
 }
