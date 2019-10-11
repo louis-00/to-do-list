@@ -1,3 +1,6 @@
-<p>
-  lists works!
-</p>
+<ion-list color="dark">
+    <ion-item *ngFor="let task of taskService.tasks" detail color="dark" (click)="selectedTask(task)">
+        <ion-label>{{task.title}}</ion-label>
+        <ion-note slot="end" color="tertiary">{{task.items.length}} items</ion-note>
+    </ion-item>
+</ion-list>
