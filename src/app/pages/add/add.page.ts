@@ -57,7 +57,13 @@ export class AddPage implements OnInit {
 
     console.log(this.taskService.tasks);
     
+  }
+
+  delete(i:number){
+
+    this.task.items.splice(i, 1);
     
+    this.taskService.saveStorage();
   }
 }
  
